@@ -22,8 +22,7 @@ done;
 echo "Compiling $series/coastline polygons"
 echo "Compiling $series/coastline polygons" >> prep_data.log
 python makepoly.py data/$series/coastline_gm.shp data/$series/coastline_poly_gm.shp >> prep_data.log 2>&1
- 
-shapeindex data/$series/coastline_poly_gm.shp
+shapeindex data/$series/coastline_poly_gm.shp >> prep_data.log 2>&1
 done;
 
 
