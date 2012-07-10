@@ -56,10 +56,6 @@
 }
   
   
-#topo50_sea {
-  polygon-fill: @light_water;
-  line-width: 0;}
-
 #topo50_coastline [zoom>=13]{
   line-color: @dark_water;
   line-width: 0.5;
@@ -69,8 +65,22 @@
   line-width: 0.5;
   }
 
-
 #topo50_island [zoom>11] {
   line-color: @dark_water;
   line-width: 0.5;
   }
+
+.50k_island_base [zoom>=13] {
+   polygon-fill: @island_base;
+   line-color: @island_base;
+   line-width: 0.5;
+   }
+
+.500k_island_base [zoom<13] {
+   polygon-fill: @island_base;
+   line-color: @island_base;
+   line-width: 0.5;
+   }
+
+
+

@@ -4,20 +4,35 @@
 @dark_grey: #B3B0A9;
 
 @residential: @light_grey; 
-/* @exotic: #E5F2C7;
- @native: #D2DEB5; */
 @native: rgba(190,210,113,1);
 @exotic: rgba(206,216,168,1);
 @light_water: #D0E6F4;
 @dark_water: #0D85D8;
 @contours: #e8933f;
 @road: #e8933f;
+@road2: #ffffff;
+@road_edge: #000000;
 @state_highway: #EB704F;
+@island_base: #ffffff;
 
 Map {
-  background-color: #E1DFC5;
+  background-color: @light_water;
 }
  
+/* Background for islands on basemap */
+
+.50k_island_base [zoom>=13] {
+   polygon-fill: @island_base;
+   line-color: @island_base;
+   line-width: 0.5;
+   }
+
+.500k_island_base [zoom<13] {
+   polygon-fill: @island_base;
+   line-color: @island_base;
+   line-width: 0.5;
+   }
+
 #topo500_snow {polygon-fill: #ffffff;
 polygon-opacity: 0.75;}
 

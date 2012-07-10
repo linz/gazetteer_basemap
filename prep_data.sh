@@ -25,4 +25,5 @@ python makepoly.py data/$series/coastline_gm.shp data/$series/coastline_poly_gm.
 shapeindex data/$series/coastline_poly_gm.shp >> prep_data.log 2>&1
 done;
 
+cp /usr/local/data/topo250/Topo250_hillshade.tif data/topo250
 
