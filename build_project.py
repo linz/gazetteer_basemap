@@ -52,6 +52,7 @@ parser.add_argument('-c','--config',help='Configuration file overriding defaults
 parser.add_argument('-p','--project',help='Output project file',default='project.mml')
 parser.add_argument('-l','--layers',help='File of layers (overriding configuration)')
 parser.add_argument('--clean',action='store_true', help='Clear filecache before starting')
+parser.add_argument('--dry-run',action='store_true', help='Dry run - don\'t build data files')
 args = parser.parse_args()
 
 prjfile=args.project
@@ -79,13 +80,17 @@ types=cfg["types"]
 if args.clean:
     cleancmd = expand_template(cfg.get('commands',{}).get('clean'),macros)
     if cleancmd:
-        print "Executing",cleancmd
-        subprocess.call(cleancmd, shell=True)
+        if args.dry_run:
+            print "Executing:",cleancmd
+        else:
+            subprocess.call(cleancmd, shell=True)
 
 initcmd = expand_template(cfg.get('commands',{}).get('initiallize'),macros)
 if initcmd:
-    print "Executing",initcmd
-    subprocess.call(initcmd,shell=True)
+    if args.dry_run:
+        print "Executing:",initcmd
+    else:
+        subprocess.call(initcmd,shell=True)
 
 prj = expand_template(cfg["project_template"],macros)
 
@@ -112,19 +117,20 @@ for l in cfg["layers"]:
              fid += "%02d"%(i+1)
          macros.update( { 'id': fid, 'classes': cls, 'file': f, 'source': src, 'type': ltype })
          prepcmd = typedef.get("prepare", None)
-         testfile = expand_template(typedef.get("test", None),macros)
+         testfile = expand_template(typedef.get("testfile", None),macros)
          if prepcmd and (not testfile or not os.path.exists(testfile)):
              prepcmd = expand_template(prepcmd, macros )
              print "Executing:",prepcmd
-             subprocess.call(prepcmd, shell=True)
-         if testfile and not os.path.exists(testfile):
+             if not args.dry_run:
+                 subprocess.call(prepcmd, shell=True)
+         if not args.dry_run and testfile and not os.path.exists(testfile):
              raise ValueError("Cannot find or build file "+testfile)
 
          layer = expand_template(cfg["layer_template"],macros)
          layer.update(expand_template(typedef.get("layer_template",{}),macros))
          layers.append(layer)
 
-layers.reverse()
+# layers.reverse()
 prj["Layer"] = layers
 json.dump(prj,open(prjfile,"w"),indent=4)
 

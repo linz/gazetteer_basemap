@@ -1,19 +1,4 @@
-/* ---- PALETTE ---- */
-
-@light_grey: #D1D1D1;
-@dark_grey: #B3B0A9;
-
-@residential: @light_grey; 
-@native: rgba(190,210,113,1);
-@exotic: rgba(206,216,168,1);
-@light_water: #D0E6F4;
-@dark_water: #0D85D8;
-@contours: #e8933f;
-@road: #e8933f;
-@road2: #ffffff;
-@road_edge: #000000;
-@state_highway: #EB704F;
-@island_base: #ffffff;
+/* Map background */
 
 Map {
   background-color: @light_water;
@@ -21,13 +6,13 @@ Map {
  
 /* Background for islands on basemap */
 
-.50k_island_base [zoom>=13] {
+.50k_land_base [zoom>=13] {
    polygon-fill: @island_base;
    line-color: @island_base;
    line-width: 0.5;
    }
 
-.500k_island_base [zoom<13] {
+.500k_land_base [zoom<13] {
    polygon-fill: @island_base;
    line-color: @island_base;
    line-width: 0.5;
@@ -36,8 +21,8 @@ Map {
 #topo500_snow {polygon-fill: #ffffff;
 polygon-opacity: 0.75;}
 
-#topo50_hillshade_raster {raster-opacity:0.1;}
-#topo250_hillshade {raster-opacity:0.1;}
+/* #topo50_hillshade_raster {raster-opacity:0.1;} */
+.topo250_hillshade {raster-opacity:0.1;}
 
 
 #topo50_building_poly[zoom>=13] {
