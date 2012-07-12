@@ -53,6 +53,8 @@ def expand_string( string, macros, params=None, max=10 ):
         string=u"\n".join(list)
     elif type(string) not in (str, unicode):
         return string
+    if max <= 0:
+        return string
     pdict = {}
     if type(params) == dict:
         pdict = params
