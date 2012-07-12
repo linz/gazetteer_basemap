@@ -12,6 +12,6 @@
 @contours: #e8933f;
 @road: #e8933f;
 @road2: #ffffff;
-@road_edge: #000000;
+@road_edge: @dark_grey;
 @state_highway: #EB704F;
-
+@railway: #000000;
