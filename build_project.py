@@ -50,7 +50,7 @@ def expand_template( template, macros ):
 parser = argparse.ArgumentParser('Build a tilemill project')
 parser.add_argument('-c','--config',help='Configuration file overriding defaults from build_project.cfg')
 parser.add_argument('-p','--project',help='Output project file',default='project.mml')
-parser.add_argument('-l','--layers',help='File of layers (overriding configuration)')
+parser.add_argument('-l','--layers',help='File of layers (overriding configuration)',default='layers.cfg')
 parser.add_argument('--clean',action='store_true', help='Clear filecache before starting')
 parser.add_argument('--dry-run',action='store_true', help='Dry run - don\'t build data files')
 args = parser.parse_args()

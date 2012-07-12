@@ -31,7 +31,10 @@ Map {
 
 .hillshade
 {
-   .topo250 {raster-opacity:0.1;}
+   .topo250[zoom>4] 
+    {
+        raster-opacity: 1.0;
+    }
 }
 
 /* Vegetation layers */
