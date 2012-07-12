@@ -3,7 +3,8 @@
 tif=$1
 outf=$2
 
-rm="echo rm"
+#rm="echo rm"
+rm=rm
 
 $rm -f temp1.tif
 gdalwarp -s_srs EPSG:2193 -t_srs EPSG:3785 $tif temp1.tif
