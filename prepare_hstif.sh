@@ -1,4 +1,10 @@
 #!/bin/bash
+#
+#  Script to build a hillshading image file from the source.  The intention of this is
+#  to build an image which is black, with the hillshading encoded in the alpha channel, which
+#  can then be laid over the basemap.  It isn't working yet!
+# 
+#  This also converts from the source projection (2193) to 3785
 
 tif=$1
 outf=$2

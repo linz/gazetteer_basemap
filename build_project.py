@@ -1,4 +1,45 @@
 #!/usr/bin/python
+'''
+
+This script prepares the data and project files for a tilemill project.
+
+It uses a JSON formatted configuration file which contains the following components:
+
+cfg.macros:  String substitutions used in the project
+cfg.commands.initiallize:  Shell commands run to initiallize the project
+cfg.commands.clean:   Shell commands run if the --clean option is specified
+cfg.types: A list of types of file (each different type is prepared in a different way and may have
+     a different layer template used to install it into the project.mml file)
+    cfg.types[i].testfile:  The name of a file that can be used to see if the data is already prepared
+    cfg.types[i].prepare:  Shell script run to prepare the data file (s)
+    cfg.types[i].layer_template:  Any entries here override the default layers template
+cfg.project_template: Project file template
+cfg.layer_template: Template for each layer in the project file
+
+An additional configuration file can be specified which can replace or add cfg.macros and cfg.types
+items and replace any other item completely.
+
+The template uses a simple string substitution to encode options.  When expanding strings and templates
+the value {xxx} is replaced with the macro for xxx from the cfg.macros dictionary.  This happens
+recursively.  In addition to the macros, it can also use the id, classes, source, type, and file 
+values from each layer as it is processed.  The macro can also define values that will be used when it is 
+expanded using {xxx:str1=replacemnt1:str2=replacement2}
+
+The layers.cfg file is a simple text file.  Each uncommented line contains:
+
+id       The id for the layer. If the layer has more than one file then 01, 02, .. is appended to this.
+classes  A list of classes to use for the layer in the project file. Classes are separated with a "/"
+source   The source for the data (eg topo50, topo500).  This may be used in macros to locate and name the
+         file
+type     The type of the file, defining which cfg.type method is used to prepare it and add it to the
+         project file
+file..   A space separated list of file names.  Each will be processed in turn.  This is not the actual
+         name of the file, but a base name used in the project configuration macros to prepare and 
+         install the file.
+
+The layers should be ordered from the bottomost on the basemap to the topmost (ie lowest layers first)
+
+'''
 import sys
 import os
 import os.path
@@ -16,7 +57,7 @@ def expand_string( string, macros, params=None, max=10 ):
     if type(params) == dict:
         pdict = params
     elif type(params) in (str, unicode) and params != '':
-        for ds in params.split(';'):
+        for ds in params.split(':'):
             m = re.match(r"(\w+)\=(.*)",ds)
             if m:
                 pdict[m.group(1)]=m.group(2)
@@ -25,7 +66,7 @@ def expand_string( string, macros, params=None, max=10 ):
         rdict[k] = macros.get(k)
         macros[k] = pdict[k]
 
-    string=re.sub(r"\{(\w+)(?:\:([^{}]*))?\}",
+    string=re.sub(r"\{(\w+)((?:\:\w+\=[^:{}]*))*\}",
                       lambda x: expand_string(macros.get(x.group(1),""),macros,x.group(2),max-1),
                       string)
 
