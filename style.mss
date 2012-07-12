@@ -1,28 +1,59 @@
 /* Map background */
 
 Map {
-  background-color: @light_water;
+  background-color: @map_base;
 }
  
 /* Background for islands on basemap */
 
-.50k_land_base [zoom>=13] {
-   polygon-fill: @island_base;
-   line-color: @island_base;
+.land_base 
+{
+  .topo500[zoom<13],
+  .topo50[zoom>=13]
+   {
+   polygon-fill: @land_base;
+   line-color: @land_base;
    line-width: 0.5;
    }
+}
 
-.500k_land_base [zoom<13] {
-   polygon-fill: @island_base;
-   line-color: @island_base;
+.coastline
+{
+  .topo500[zoom<13],
+  .topo50[zoom>=13]
+   {
+   line-color: @dark_water;
    line-width: 0.5;
    }
+}
 
+/* Currently only using topo250 hill shading ... */
+
+.hillshade
+{
+   .topo250 {raster-opacity:0.1;}
+}
+
+/* Vegetation layers */
+
+.vege {
+  .exotic.topo50[zoom>=13],
+  .exotic.topo250[zoom<13] 
+  {
+  polygon-fill: @exotic;
+  }
+  .native.topo50[zoom>=13],
+  .native.topo250[zoom<13] 
+  {
+  polygon-fill: @native;
+  }
+}
+
+/*
 #topo500_snow {polygon-fill: #ffffff;
 polygon-opacity: 0.75;}
 
-/* #topo50_hillshade_raster {raster-opacity:0.1;} */
-.topo250_hillshade {raster-opacity:0.1;}
+ #topo50_hillshade_raster {raster-opacity:0.1;}
 
 
 #topo50_building_poly[zoom>=13] {
@@ -35,14 +66,6 @@ polygon-opacity: 0.75;}
   line-width: 1;
   polygon-fill: @residential;
 polygon-opacity: 0.75;}
-
-#topo50_exotic {
-  polygon-fill: @exotic;
-  polygon-opacity: 0.75;}
-
-#topo50_native {
-  polygon-fill: @native;
-  polygon-opacity: 0.75;}
 
 
 .elevation  {line-color: @contours;}
@@ -90,6 +113,6 @@ line-color:rgba(128,128,128,0.5)}}
 
 #topo50_runway[zoom>=13] {polygon-fill: @dark_grey;}
 
-
+*/
 
 

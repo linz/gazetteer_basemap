@@ -4,330 +4,195 @@
         {
             "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo500_island_poly_gm.shp"
+                "file": "filecache/topo500_island_poly_gm.shp"
             }, 
             "name": "topo500_island_poly", 
             "id": "topo500_island_poly", 
-            "class": "500k_land_base"
+            "class": "land_base coastline topo500"
         }, 
         {
             "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo500_coastline_poly_gm.shp"
+                "file": "filecache/topo500_coastline_poly_gm.shp"
             }, 
             "name": "topo500_coastline_poly", 
             "id": "topo500_coastline_poly", 
-            "class": "500k_land_base"
+            "class": "land_base topo500"
         }, 
         {
             "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_island_poly_gm.shp"
+                "file": "filecache/topo500_coastline_gm.shp"
             }, 
-            "name": "topo250_island_poly", 
-            "id": "topo250_island_poly", 
-            "class": "250k_land_base"
+            "name": "topo500_coastline", 
+            "id": "topo500_coastline", 
+            "class": "coastline topo500"
         }, 
         {
             "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_coastline_poly_gm.shp"
-            }, 
-            "name": "topo250_coastline_poly", 
-            "id": "topo250_coastline_poly", 
-            "class": "250k_land_base"
-        }, 
-        {
-            "srs": "", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo50_island_poly_gm.shp"
+                "file": "filecache/topo50_island_poly_gm.shp"
             }, 
             "name": "topo50_island_poly", 
             "id": "topo50_island_poly", 
-            "class": "50k_land_base"
+            "class": "land_base coastline topo50"
         }, 
         {
             "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo50_coastline_poly_gm.shp"
+                "file": "filecache/topo50_coastline_poly_gm.shp"
             }, 
             "name": "topo50_coastline_poly", 
             "id": "topo50_coastline_poly", 
-            "class": "50k_land_base"
+            "class": "land_base topo50"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_01_hs_gm.tif"
+                "file": "filecache/topo50_coastline_gm.shp"
             }, 
-            "name": "topo250_hillshade01", 
-            "id": "topo250_hillshade01", 
-            "class": "default"
+            "name": "topo50_coastline", 
+            "id": "topo50_coastline", 
+            "class": "coastline topo50"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_02_hs_gm.tif"
+                "file": "filecache/topo50_native_poly_gm.shp"
             }, 
-            "name": "topo250_hillshade02", 
-            "id": "topo250_hillshade02", 
-            "class": "default"
+            "name": "topo50_native", 
+            "id": "topo50_native", 
+            "class": "vege native topo50"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_03_hs_gm.tif"
+                "file": "filecache/topo50_exotic_poly_gm.shp"
             }, 
-            "name": "topo250_hillshade03", 
-            "id": "topo250_hillshade03", 
-            "class": "default"
+            "name": "topo50_exotic", 
+            "id": "topo50_exotic", 
+            "class": "vege exotic topo50"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_04_hs_gm.tif"
+                "file": "filecache/topo250_native_poly_gm.shp"
             }, 
-            "name": "topo250_hillshade04", 
-            "id": "topo250_hillshade04", 
-            "class": "default"
+            "name": "topo250_native", 
+            "id": "topo250_native", 
+            "class": "vege native topo250"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_05_hs_gm.tif"
+                "file": "filecache/topo250_exotic_poly_gm.shp"
             }, 
-            "name": "topo250_hillshade05", 
-            "id": "topo250_hillshade05", 
-            "class": "default"
+            "name": "topo250_exotic", 
+            "id": "topo250_exotic", 
+            "class": "vege exotic topo250"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_06_hs_gm.tif"
+                "file": "filecache/topo500_lake_poly_gm.shp"
             }, 
-            "name": "topo250_hillshade06", 
-            "id": "topo250_hillshade06", 
-            "class": "default"
+            "name": "topo500_lake_poly", 
+            "id": "topo500_lake_poly", 
+            "class": "lake topo500"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_07_hs_gm.tif"
+                "file": "filecache/topo500_river_cl_gm.shp"
             }, 
-            "name": "topo250_hillshade07", 
-            "id": "topo250_hillshade07", 
-            "class": "default"
+            "name": "topo500_river_cl", 
+            "id": "topo500_river_cl", 
+            "class": "river topo500"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_08_hs_gm.tif"
+                "file": "filecache/topo250_lake_poly_gm.shp"
             }, 
-            "name": "topo250_hillshade08", 
-            "id": "topo250_hillshade08", 
-            "class": "default"
+            "name": "topo250_lake_poly", 
+            "id": "topo250_lake_poly", 
+            "class": "lake topo250"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_09_hs_gm.tif"
+                "file": "filecache/topo50_canal_cl_gm.shp"
             }, 
-            "name": "topo250_hillshade09", 
-            "id": "topo250_hillshade09", 
-            "class": "default"
+            "name": "topo50_canal", 
+            "id": "topo50_canal", 
+            "class": "river topo50"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_10_hs_gm.tif"
+                "file": "filecache/topo50_drain_cl_gm.shp"
             }, 
-            "name": "topo250_hillshade10", 
-            "id": "topo250_hillshade10", 
-            "class": "default"
+            "name": "topo50_drain", 
+            "id": "topo50_drain", 
+            "class": "river topo50"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_11_hs_gm.tif"
+                "file": "filecache/topo50_lagoon_poly_gm.shp"
             }, 
-            "name": "topo250_hillshade11", 
-            "id": "topo250_hillshade11", 
-            "class": "default"
+            "name": "topo50_lagoon_poly", 
+            "id": "topo50_lagoon_poly", 
+            "class": "lake topo50"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_12_hs_gm.tif"
+                "file": "filecache/topo50_lake_poly_gm.shp"
             }, 
-            "name": "topo250_hillshade12", 
-            "id": "topo250_hillshade12", 
-            "class": "default"
+            "name": "topo50_lake_poly", 
+            "id": "topo50_lake_poly", 
+            "class": "lake topo50"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_13_hs_gm.tif"
+                "file": "filecache/topo50_pond_poly_gm.shp"
             }, 
-            "name": "topo250_hillshade13", 
-            "id": "topo250_hillshade13", 
-            "class": "default"
+            "name": "topo50_pond", 
+            "id": "topo50_pond", 
+            "class": "lake topo50"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_14_hs_gm.tif"
+                "file": "filecache/topo50_reservoir_poly_gm.shp"
             }, 
-            "name": "topo250_hillshade14", 
-            "id": "topo250_hillshade14", 
-            "class": "default"
+            "name": "topo50_resevoir", 
+            "id": "topo50_resevoir", 
+            "class": "lake topo50"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_15_hs_gm.tif"
+                "file": "filecache/topo50_river_cl_gm.shp"
             }, 
-            "name": "topo250_hillshade15", 
-            "id": "topo250_hillshade15", 
-            "class": "default"
+            "name": "topo50_river_cl", 
+            "id": "topo50_river_cl", 
+            "class": "river topo50"
         }, 
         {
-            "srs": "EPSG:3785", 
+            "srs": "", 
             "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_16_hs_gm.tif"
+                "file": "filecache/topo50_river_poly_gm.shp"
             }, 
-            "name": "topo250_hillshade16", 
-            "id": "topo250_hillshade16", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_17_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade17", 
-            "id": "topo250_hillshade17", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_18_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade18", 
-            "id": "topo250_hillshade18", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_19_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade19", 
-            "id": "topo250_hillshade19", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_20_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade20", 
-            "id": "topo250_hillshade20", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_21_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade21", 
-            "id": "topo250_hillshade21", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_22_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade22", 
-            "id": "topo250_hillshade22", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_23_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade23", 
-            "id": "topo250_hillshade23", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_24_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade24", 
-            "id": "topo250_hillshade24", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_25_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade25", 
-            "id": "topo250_hillshade25", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_26_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade26", 
-            "id": "topo250_hillshade26", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_27_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade27", 
-            "id": "topo250_hillshade27", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_28_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade28", 
-            "id": "topo250_hillshade28", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_29_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade29", 
-            "id": "topo250_hillshade29", 
-            "class": "default"
-        }, 
-        {
-            "srs": "EPSG:3785", 
-            "Datasource": {
-                "file": "/home/ccrook/tilemill/Gaz_Render/filecache/topo250_30_hs_gm.tif"
-            }, 
-            "name": "topo250_hillshade30", 
-            "id": "topo250_hillshade30", 
-            "class": "default"
+            "name": "topo50_river_poly", 
+            "id": "topo50_river_poly", 
+            "class": "river_poly topo50"
         }
     ], 
     "attribution": "Land Information New Zealand", 
-    "description": "Topo basemap (without names)", 
+    "description": "LINZ Gazetteer basemap", 
     "format": "png", 
     "center": [
         173, 

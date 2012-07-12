@@ -1,30 +1,29 @@
 
-#topo500_lake_poly {[zoom<=8] {polygon-fill: @light_water; line-color: @dark_water;
-    line-width: 0.5;
-  }}
-
-/*
-#topo500_lake_poly {[zoom=9],[zoom=10],[zoom=11],[zoom=12],[zoom=13] {
-  polygon-fill: @light_water; line-color:@dark_water;
-  }} */
-
-#topo250_lake_poly {[zoom=9],[zoom=10],[zoom=11],[zoom=12],[zoom=13] {
-  polygon-fill: @light_water; line-color:@dark_water;
-  }} 
-
- 
-#topo50_lake_poly {[zoom>13] {
-  polygon-fill: @light_water;
-  line-color:@dark_water;
-  }}
+.lake
+{
+   .topo500[zoom<=8],
+   .topo250[zoom>8][zoom<=13],
+   .top50[zoom>13]
+   {
+       polygon-fill: @light_water; 
+       line-color: @dark_water;
+   }
+   .topo500[zoom<=8]
+   {
+       line-width: 0.5;
+   }
+}
 
 
-
-.hydro {[zoom>13]{
-  polygon-fill: @light_water;
-  line-color: @dark_water;
-  }}
-
+.river
+{
+   .topo500[zoom>9][zoom<=12],
+   .topo50[zoom>12]
+   {
+       line-width: 1; 
+       line-color: @dark_water; 
+   }
+}
 
 #topo500_river_cl {[zoom<10] {line-width: 0; line-color: @dark_water;} 
  }
@@ -69,18 +68,3 @@
   line-color: @dark_water;
   line-width: 0.5;
   }
-
-.50k_island_base [zoom>=13] {
-   polygon-fill: @island_base;
-   line-color: @island_base;
-   line-width: 0.5;
-   }
-
-.500k_island_base [zoom<13] {
-   polygon-fill: @island_base;
-   line-color: @island_base;
-   line-width: 0.5;
-   }
-
-
-
