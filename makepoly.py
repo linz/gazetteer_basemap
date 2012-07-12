@@ -7,9 +7,20 @@ import numpy as np
 import logging
 from collections import namedtuple
 
-#logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.INFO)
 
 class Ring( object ):
+
+    class Intersection( object ):
+
+        def __init__(self,no,band,nextpt,dir,xy,used,offset):
+            self.no = no
+            self.band = band
+            self.nextpt = nextpt
+            self.dir = dir
+            self.xy = xy
+            self.used = used
+            self.offset = offset
 
     def __init__( self, pts ):
         self._pts = pts
@@ -52,8 +63,8 @@ class Ring( object ):
         # forming the final polygons (used[0] = used in polygon from previous node, 
         # used[1] = used in polygon to next node).
 
+        Intersection = Ring.Intersection
         nint = 0
-        Intersection=namedtuple('Intersection','no band nextpt dir xy used offset')
         intlist = []
         for i in range(len(bands)-1):
             if bands[i] == bands[i+1]:
@@ -72,6 +83,23 @@ class Ring( object ):
                 intlist.append(its)
                 nint += 1
 
+        # Form the list of intersections on each band boundary
+
+        intersections={}
+        for its in intlist:
+            b=its.band
+            if b not in intersections:
+                intersections[b] = []
+            intersections[b].append(its)
+        logging.info("Intersections")
+        for b in intersections:
+            intersections[b].sort(key=lambda x: x.xy[axis2])
+            if logging.root.isEnabledFor(logging.INFO):
+                logging.info("Band %d: %d intersections",b,len(intersections[b]))
+                for its in intersections[b]:
+                    logging.info("   %s",str(its))
+            
+
         # Allow minor incursions from one band into the next to avoid pointless
         # small geometries
 
@@ -84,20 +112,29 @@ class Ring( object ):
                 offset = bandsize+1
                 its0 = intlist[i]
                 its1 = intlist[i+1]
-                if its0.dir != its1.dir:
-                    npt = its1.nextpt-its0.nextpt
-                    if npt < 0:
-                        npt += imax
-                    if npt <= npttol:
-                        if its0.nextpt < its1.nextpt:
-                            offset = np.amax((vals[its0.nextpt:its1.nextpt]-its0.xy[axis])*its0.dir)
-                        else:
-                            offset = max(
-                                np.amax((vals[its0.nextpt:]-its0.xy[axis])*its0.dir),
-                                np.amax((vals[:its1.nextpt]-its0.xy[axis])*its0.dir)
-                                if its1.nextpt > 0 else 0.0
-                                )
-                    intlist[i] = its0._replace(offset=offset)
+                if its0.dir == its1.dir:
+                    continue
+                # If the join between the two sections is not on land then 
+                # it can't be cut out
+                blist = intersections[its0.band]
+                ib0=blist.index(its0)
+                ib1=blist.index(its1)
+                if ib0/2 != ib1/2:
+                    continue
+
+                npt = its1.nextpt-its0.nextpt
+                if npt < 0:
+                    npt += imax
+                if npt <= npttol:
+                    if its0.nextpt < its1.nextpt:
+                        offset = np.amax((vals[its0.nextpt:its1.nextpt]-its0.xy[axis])*its0.dir)
+                    else:
+                        offset = max(
+                            np.amax((vals[its0.nextpt:]-its0.xy[axis])*its0.dir),
+                            np.amax((vals[:its1.nextpt]-its0.xy[axis])*its0.dir)
+                            if its1.nextpt > 0 else 0.0
+                            )
+                its0.offset=offset
 
             # Now find sections that can be amalgamated into adjacent bands
 
@@ -129,6 +166,9 @@ class Ring( object ):
                 logging.info("Amalgamating to %s",str(its1))
                 intlist.remove(its0)
                 intlist.remove(its1)
+                blist = intersections[its0.band]
+                blist.remove(its0)
+                blist.remove(its1)
                 itsp = intlist[imin-1]
                 ip0 = intlist.index(itsp)
                 offset = max(itsp.offset,its1.offset)
@@ -139,28 +179,12 @@ class Ring( object ):
                         npt += imax
                     if npt > npttol:
                         offset = bandsize+1
-                intlist[ip0] = itsp._replace(offset=offset)
+                itsp.offset=offset
 
             if logging.root.isEnabledFor(logging.INFO):
                 logging.info("Ring points (no,band,x,y)")
                 for i in range(len(pts)):
                     logging.info( "%d %d %f %f",i,bands[i],pts[i][0],pts[i][1])
-
-        # Form the list of intersections on each band boundary
-
-        intersections={}
-        for its in intlist:
-            b=its.band
-            if b not in intersections:
-                intersections[b] = []
-            intersections[b].append(its)
-        logging.info("Intersections")
-        for b in intersections:
-            intersections[b].sort(key=lambda x: x.xy[axis2])
-            if logging.root.isEnabledFor(logging.INFO):
-                logging.info("Band %d: %d intersections",b,len(intersections[b]))
-                for its in intersections[b]:
-                    logging.info("   %s",str(its))
 
         # Dump all the rings formed by this splitting.  Set bands to -1 as each point is used.
 

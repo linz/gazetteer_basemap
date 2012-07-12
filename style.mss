@@ -8,8 +8,8 @@ Map {
 
 .land_base 
 {
-  .topo500[zoom<13],
-  .topo50[zoom>=13]
+  .topo500[zoom<12],
+  .topo50[zoom>=12]
    {
    polygon-fill: @land_base;
    line-color: @land_base;
@@ -49,30 +49,20 @@ Map {
   }
 }
 
-#topo500_snow {polygon-fill: #ffffff;
-polygon-opacity: 0.75;}
+.snow
+{
+   polygon-fill: @snow;
+   polygon-opacity: 0.5;
+}
 
-
-.elevation  {line-color: @contours;}
-.topo50_contour
-{ [zoom<13] {  line-width: 0; }
-  [zoom>=13] {  line-width: 0.5; } }
-
-#topo500_contours 
-{ [zoom>13] {  line-width: 0; }  
-[zoom<13] {  line-width: 0.5; }
-[zoom<10] {  line-width: 0; }}
-
-
-
-#topo50_shelterbelt {[zoom>=13]{
-  line-color: @native;
-  line-width: 1;}
+.contour  
+{
+  .topo500[zoom>=10][zoom<13],
+  .topo50[zoom>=13]
+  {
+      line-color: @contour;
+      line-width: 0.5;
+      line-opacity: 0.5;
   }
-
-
-#topo50_fence_cl { [zoom>=13]{
-  line-color: #000000;
-  line-width: 0.5;
-  }}
+}
 

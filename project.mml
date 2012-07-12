@@ -1,120 +1,345 @@
 {
-  "bounds": [
-    166,
-    -48,
-    180,
-    -34
-  ],
-  "center": [
-    173,
-    -41,
-    5
-  ],
-  "format": "png",
-  "interactivity": false,
-  "minzoom": 5,
-  "maxzoom": 14,
-  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-  "Stylesheet": [
-    "macros.mss",
-    "style.mss",
-    "roads.mss",
-    "residential.mss",
-    "water.mss"
-  ],
-  "Layer": [
-    {
-      "srs": "",
-      "Datasource": {
-        "file": "filecache/topo500_island_poly_gm.shp"
-      },
-      "name": "topo500_island_poly",
-      "id": "topo500_island_poly",
-      "class": "land_base coastline topo500"
-    },
-    {
-      "srs": "",
-      "Datasource": {
-        "file": "filecache/topo500_coastline_poly_gm.shp"
-      },
-      "name": "topo500_coastline_poly",
-      "id": "topo500_coastline_poly",
-      "class": "land_base topo500"
-    },
-    {
-      "srs": "",
-      "Datasource": {
-        "file": "filecache/topo500_coastline_gm.shp"
-      },
-      "name": "topo500_coastline",
-      "id": "topo500_coastline",
-      "class": "coastline topo500"
-    },
-    {
-      "srs": "",
-      "Datasource": {
-        "file": "filecache/topo50_island_poly_gm.shp"
-      },
-      "name": "topo50_island_poly",
-      "id": "topo50_island_poly",
-      "class": "land_base coastline topo50"
-    },
-    {
-      "srs": "",
-      "Datasource": {
-        "file": "filecache/topo50_coastline_poly_gm.shp"
-      },
-      "name": "topo50_coastline_poly",
-      "id": "topo50_coastline_poly",
-      "class": "land_base topo50"
-    },
-    {
-      "srs": "",
-      "Datasource": {
-        "file": "filecache/topo50_coastline_gm.shp"
-      },
-      "name": "topo50_coastline",
-      "id": "topo50_coastline",
-      "class": "coastline topo50"
-    },
-    {
-      "srs": "",
-      "Datasource": {
-        "file": "filecache/topo250_road_cl_gm.shp"
-      },
-      "name": "topo250_road_cl",
-      "id": "topo250_road_cl",
-      "class": "road topo250"
-    },
-    {
-      "srs": "",
-      "Datasource": {
-        "file": "filecache/topo50_road_cl_gm.shp"
-      },
-      "name": "topo50_road_cl",
-      "id": "topo50_road_cl",
-      "class": "road topo50"
-    },
-    {
-      "srs": "",
-      "Datasource": {
-        "file": "filecache/topo50_track_cl_gm.shp"
-      },
-      "name": "topo50_track_cl",
-      "id": "topo50_track_cl",
-      "class": "track topo50"
-    },
-    {
-      "srs": "",
-      "Datasource": {
-        "file": "filecache/topo50_railway_cl_gm.shp"
-      },
-      "name": "topo50_railway_cl",
-      "id": "topo50_railway_cl",
-      "class": "railway topo50"
-    }
-  ],
-  "attribution": "Land Information New Zealand",
-  "description": "LINZ Gazetteer basemap",
-  "name": "gaz_basemap "
+    "interactivity": false, 
+    "Layer": [
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo500_island_poly_gm.shp"
+            }, 
+            "name": "topo500_island_poly", 
+            "id": "topo500_island_poly", 
+            "class": "land_base coastline topo500"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo500_coastline_poly_gm.shp"
+            }, 
+            "name": "topo500_coastline_poly", 
+            "id": "topo500_coastline_poly", 
+            "class": "land_base topo500"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo500_coastline_gm.shp"
+            }, 
+            "name": "topo500_coastline", 
+            "id": "topo500_coastline", 
+            "class": "coastline topo500"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_island_poly_gm.shp"
+            }, 
+            "name": "topo50_island_poly", 
+            "id": "topo50_island_poly", 
+            "class": "land_base coastline topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_coastline_poly_gm.shp"
+            }, 
+            "name": "topo50_coastline_poly", 
+            "id": "topo50_coastline_poly", 
+            "class": "land_base topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_coastline_gm.shp"
+            }, 
+            "name": "topo50_coastline", 
+            "id": "topo50_coastline", 
+            "class": "coastline topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_native_poly_gm.shp"
+            }, 
+            "name": "topo50_native", 
+            "id": "topo50_native", 
+            "class": "vege native topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_exotic_poly_gm.shp"
+            }, 
+            "name": "topo50_exotic", 
+            "id": "topo50_exotic", 
+            "class": "vege exotic topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo250_native_poly_gm.shp"
+            }, 
+            "name": "topo250_native", 
+            "id": "topo250_native", 
+            "class": "vege native topo250"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo250_exotic_poly_gm.shp"
+            }, 
+            "name": "topo250_exotic", 
+            "id": "topo250_exotic", 
+            "class": "vege exotic topo250"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo500_lake_poly_gm.shp"
+            }, 
+            "name": "topo500_lake_poly", 
+            "id": "topo500_lake_poly", 
+            "class": "lake topo500"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo250_lake_poly_gm.shp"
+            }, 
+            "name": "topo250_lake_poly", 
+            "id": "topo250_lake_poly", 
+            "class": "lake topo250"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_lagoon_poly_gm.shp"
+            }, 
+            "name": "topo50_lagoon_poly", 
+            "id": "topo50_lagoon_poly", 
+            "class": "lake topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_lake_poly_gm.shp"
+            }, 
+            "name": "topo50_lake_poly", 
+            "id": "topo50_lake_poly", 
+            "class": "lake topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_pond_poly_gm.shp"
+            }, 
+            "name": "topo50_pond", 
+            "id": "topo50_pond", 
+            "class": "lake topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_reservoir_poly_gm.shp"
+            }, 
+            "name": "topo50_resevoir", 
+            "id": "topo50_resevoir", 
+            "class": "lake topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo500_residential_area_poly_gm.shp"
+            }, 
+            "name": "topo500_residential", 
+            "id": "topo500_residential", 
+            "class": "residential topo500"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_residential_area_poly_gm.shp"
+            }, 
+            "name": "topo50_residential", 
+            "id": "topo50_residential", 
+            "class": "residential topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_building_poly_gm.shp"
+            }, 
+            "name": "topo50_building_poly", 
+            "id": "topo50_building_poly", 
+            "class": "residential fill topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_racetrack_poly_gm.shp"
+            }, 
+            "name": "topo50_racetrack", 
+            "id": "topo50_racetrack", 
+            "class": "residential topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_runway_poly_gm.shp"
+            }, 
+            "name": "topo50_runway", 
+            "id": "topo50_runway", 
+            "class": "residential topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_airport_poly_gm.shp"
+            }, 
+            "name": "topo50_airport", 
+            "id": "topo50_airport", 
+            "class": "residential fill topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo500_contour_gm.shp"
+            }, 
+            "name": "topo500_contours", 
+            "id": "topo500_contours", 
+            "class": "contour topo500"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_contour_north_gm.shp"
+            }, 
+            "name": "topo50_contours01", 
+            "id": "topo50_contours01", 
+            "class": "contour topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_contour_south_gm.shp"
+            }, 
+            "name": "topo50_contours02", 
+            "id": "topo50_contours02", 
+            "class": "contour topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo500_river_cl_gm.shp"
+            }, 
+            "name": "topo500_river_cl", 
+            "id": "topo500_river_cl", 
+            "class": "river topo500"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_canal_cl_gm.shp"
+            }, 
+            "name": "topo50_canal", 
+            "id": "topo50_canal", 
+            "class": "river topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_drain_cl_gm.shp"
+            }, 
+            "name": "topo50_drain", 
+            "id": "topo50_drain", 
+            "class": "river topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_river_cl_gm.shp"
+            }, 
+            "name": "topo50_river_cl", 
+            "id": "topo50_river_cl", 
+            "class": "river topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_river_poly_gm.shp"
+            }, 
+            "name": "topo50_river_poly", 
+            "id": "topo50_river_poly", 
+            "class": "river_poly topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo250_road_cl_gm.shp"
+            }, 
+            "name": "topo250_road_cl", 
+            "id": "topo250_road_cl", 
+            "class": "road topo250"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_road_cl_gm.shp"
+            }, 
+            "name": "topo50_road_cl", 
+            "id": "topo50_road_cl", 
+            "class": "road topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_track_cl_gm.shp"
+            }, 
+            "name": "topo50_track_cl", 
+            "id": "topo50_track_cl", 
+            "class": "track topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo50_railway_cl_gm.shp"
+            }, 
+            "name": "topo50_railway_cl", 
+            "id": "topo50_railway_cl", 
+            "class": "railway topo50"
+        }, 
+        {
+            "srs": "", 
+            "Datasource": {
+                "file": "filecache/topo500_snow_poly_gm.shp"
+            }, 
+            "name": "topo500_snow", 
+            "id": "topo500_snow", 
+            "class": "snow topo500"
+        }
+    ], 
+    "attribution": "Land Information New Zealand", 
+    "description": "LINZ Gazetteer basemap", 
+    "format": "png", 
+    "center": [
+        173, 
+        -41, 
+        5
+    ], 
+    "bounds": [
+        166, 
+        -48, 
+        180, 
+        -34
+    ], 
+    "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
+    "Stylesheet": [
+        "macros.mss", 
+        "style.mss", 
+        "roads.mss", 
+        "residential.mss", 
+        "water.mss"
+    ], 
+    "minzoom": 5, 
+    "maxzoom": 14, 
+    "name": "gaz_basemap "
 }

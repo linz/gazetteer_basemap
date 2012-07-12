@@ -8,6 +8,8 @@
 
 /* Build up the roads using several different symbolisers.  These will be drawn in the order 
    they occur, so put casing under road, and non-highways under highways
+
+   Note: casing layers could be combined, as all drawn underneath other symbolisers with the same colour
 */
 
 .road[hway_num = ""]::casing
@@ -21,7 +23,7 @@
            line-color: @road_edge;
            line-width: 3;
        }
-       [zoom>=10][zoom<12][hway_num = ""][surface = "sealed"]
+       [zoom>=10][zoom<12][surface = "sealed"]
        {
            line-color: @road_edge;
            line-width: 3;
@@ -37,6 +39,26 @@
            line-color: @road_edge;
            line-width: 4;
        }
+   }
+}
+
+.road[hway_num != ""]::hway_casing
+
+{
+   /* Topo250 used until zoomed well in */
+
+   .topo250[zoom<12]
+   {
+       [zoom>=10][zoom<12]
+       {
+           line-color: @road_edge;
+           line-width: 3;
+       }
+   }
+   .topo50[zoom>=12]
+   {
+       line-color: @road_edge;
+       line-width: 5;
    }
 }
 
@@ -65,33 +87,13 @@
    }
 }
 
-.road[hway_num != ""]::hway_casing
-
-{
-   /* Topo250 used until zoomed well in */
-
-   .topo250[zoom<12]
-   {
-       [zoom>=10][zoom<12]
-       {
-           line-color: @road_edge;
-           line-width: 3;
-       }
-   }
-   .topo50[zoom>=12]
-   {
-       line-color: @road_edge;
-       line-width: 5;
-   }
-}
-
 .road[hway_num != ""]::hway
 {
    /* Topo250 used until zoomed well in */
 
    .topo250[zoom<12]
    {
-       [zoom<=7]
+       [zoom>=6]
        { 
            line-color: @state_highway;
            line-width: 1;
