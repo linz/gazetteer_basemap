@@ -32,7 +32,7 @@ classes  A list of classes to use for the layer in the project file. Classes are
 source   The source for the data (eg topo50, topo500).  This may be used in macros to locate and name the
          file
 type     The type of the file, defining which cfg.type method is used to prepare it and add it to the
-         project file
+         project file.  The type can include ":param=value:param=value..."
 file..   A space separated list of file names.  Each will be processed in turn.  This is not the actual
          name of the file, but a base name used in the project configuration macros to prepare and 
          install the file.
@@ -71,7 +71,6 @@ def expand_string( string, macros, params=None, max=10 ):
     string=re.sub(r"\{(\w+)((?:\:\w+\=[^:{}]*))*\}",
                       lambda x: expand_string(macros.get(x.group(1),""),macros,x.group(2),max-1),
                       string)
-
     for k in rdict:
         if rdict[k] == None:
             del macros[k]
@@ -149,28 +148,40 @@ for l in cfg["layers"]:
      files = parts[4:]
      cls = cstr.replace('/',' ')
      
+     lmacros={}
+     if ':' in ltype:
+         parts = ltype.split(':')
+         for p in parts[1:]:
+             if '=' not in p:
+                 raise ValueError("Invalid definition of type parameters in "+ltype)
+             (k,v) = p.split('=',1)
+             lmacros[k] = v
+         ltype=parts[0]
+
      if ltype not in types:
          raise ValueError("Invalid type "+ltype+" in layer: "+l)
 
      typedef = types[ltype]
+     fmacros = macros.copy()
+     fmacros.update( { 'id': id, 'classes': cls, 'source': src, 'type': ltype })
+     fmacros.update( lmacros )
 
      for i, f in enumerate(files):
-         fid = id
+         fmacros['file'] = f
          if len(files) > 1:
-             fid += "%02d"%(i+1)
-         macros.update( { 'id': fid, 'classes': cls, 'file': f, 'source': src, 'type': ltype })
+             fmacros['id'] = id+"%02d"%(i+1)
          prepcmd = typedef.get("prepare", None)
-         testfile = expand_template(typedef.get("testfile", None),macros)
+         testfile = expand_template(typedef.get("testfile", None),fmacros)
          if prepcmd and (not testfile or not os.path.exists(testfile)):
-             prepcmd = expand_template(prepcmd, macros )
+             prepcmd = expand_template(prepcmd, fmacros )
              print "Executing:",prepcmd
              if not args.dry_run:
                  subprocess.call(prepcmd, shell=True)
          if not args.dry_run and testfile and not os.path.exists(testfile):
              raise ValueError("Cannot find or build file "+testfile)
 
-         layer = expand_template(cfg["layer_template"],macros)
-         layer.update(expand_template(typedef.get("layer_template",{}),macros))
+         layer = expand_template(cfg["layer_template"],fmacros)
+         layer.update(expand_template(typedef.get("layer_template",{}),fmacros))
          layers.append(layer)
 
 # layers.reverse()
