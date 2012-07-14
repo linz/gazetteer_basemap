@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import sys
 import os.path
 import os
@@ -5,6 +6,7 @@ import ogr
 import math
 import numpy as np
 import logging
+import argparse
 from collections import namedtuple
 
 # logging.basicConfig(level=logging.INFO)
@@ -260,66 +262,107 @@ class Ring( object ):
             assert not (its1.used[1] or its2.used[0] or its3.used[1]),"Intersections ring reusing intersection %d %d %d" % (its1.no,its2.no,its3.no)
             yield Ring(np.array([its0.xy,its1.xy,its2.xy,its3.xy,its0.xy]))
 
-class LineSet( list ):
+class LineSet( object ):
 
-    class End(namedtuple('End','no start')):
+    class End( object ):
 
-        def otherEnd( self ):
-            return LineSet.End( self.no, not self.start )
+        def __init__( self, lineid, forward, line  ):
+            self.lineid = lineid
+            self.forward = forward
+            self.xy = line[0] if forward else line[-1]
+            self.otherEnd = None
+            self.nearest=None
+
+        def __str__( self, showlink=True ):
+            nrstr=''
+            if showlink and self.nearest:
+                nrstr=self.nearest.__str__(False)
+            return "%d %s (%.2f,%.2f)%s" % (self.lineid,self.forward,self.xy[0],self.xy[1],nrstr)
+
+    def __init__( self ):
+        self._lines = []
+        self._ends = None
+
+    def __len__( self ):
+        return len( self._lines )
+
+    def append( self, line ):
+        self._lines.append( line )
+        self._ends = None
+
+    def ends( self, tolerance ):
+        if self._ends:
+            return self._ends
+        # Form a list of ends
+        endlist=[]
+        for id, line in enumerate(self._lines):
+            end1 = LineSet.End(id,True,line)
+            end2 = LineSet.End(id,False,line)
+            end1.otherEnd = end2
+            end2.otherEnd = end1
+            endlist.extend((end1, end2))
+
+        # Sort in one direction
+        endlist.sort(key=lambda end:end.xy[0])
+
+        # Find a next endpoint within a tolerance 
+        tol2 = tolerance*tolerance
+        for i,end in enumerate(endlist):
+            if end.nearest:
+                continue
+            xmax = end.xy[0]+tolerance
+            nearest = None
+            ndist = tol2
+            for end2 in endlist[i+1:]:
+                if end2.xy[0] > xmax:
+                    break
+                dist = np.sum(np.square(end.xy-end2.xy))
+                if dist <= ndist:
+                    ndist = dist
+                    nearest = end2
+                    xmax = end.xy[0] + math.sqrt(dist)
+            if nearest:
+                if nearest.nearest:
+                    raise ValueError('Lines don\'t form simple rings (error at %f %f)'%(end.xy[0],end.xy[1]))
+                nearest.nearest=end
+                end.nearest=nearest
+            else:
+                raise ValueError('Lines don''t join at %f %f)'%(end.xy[0],end.xy[1]))
 
 
-    def endpt( self, end ):
-        line = self[end.no]
-        pt = line[0] if end.start else line[-1]
-        return pt
-
-    def nearestEnd( self, end ):
-        pt = self.endpt(end)
-        nearest = None
-        minoffset = 0
-        for i in range(len(self)):
-            for terminal in (True,False):
-                testend = LineSet.End(i,terminal)
-                if testend == end:
-                    continue
-                testpt = self.endpt(testend)
-                offset = np.sum(np.square(pt-testpt))
-                if nearest == None or offset < minoffset:
-                    minoffset = offset
-                    nearest=testend
-        return nearest, minoffset
+        self._ends = endlist
+        return endlist
 
     def formRings( self, tolerance ):
         rings = []
         usedlines=[]
-        for i in range(len(self)):
-            if i in usedlines:
+        for start in self.ends(tolerance):
+            if not start.forward or start.lineid in usedlines:
                 continue
-            start = LineSet.End(i,True)
             ring = [start]
-            usedlines.append(i)
+            usedlines.append(start.lineid)
             while True:
-                next, offset = self.nearestEnd( ring[-1].otherEnd() )
-                if offset > tolerance:
-                    raise ValueError("Lines do not form a ring")
+                next = ring[-1].otherEnd.nearest
+                if not next:
+                    raise ValueError( "Topology error - no connection at (%f,%f)" % (ring[-1].xy[0],ring[-1].xy[1]))
                 if next == start:
                     rings.append(ring)
                     break
-                if next.no in usedlines:
+                if next.lineid in usedlines:
                     raise ValueError( "Topology error :-(")
-                usedlines.append(next.no)
+                usedlines.append(next.lineid)
                 ring.append(next)
         return rings
 
     def buildRing( self, ends ):
-        npt = sum((self[x.no].shape[0] for x in ends))
+        npt = sum((self._lines[x.lineid].shape[0] for x in ends))
         npt -= len(ends)-1
         ring = np.empty((npt,2))
         npt = 0
         start=0
         for r in ends:
-            l = self[r.no]
-            if not r.start:
+            l = self._lines[r.lineid]
+            if not r.forward:
                 l=l[::-1]
             l=l[start:]
             start = 1
@@ -328,12 +371,20 @@ class LineSet( list ):
             npt = npt1
         return Ring(ring)
 
-if len(sys.argv) != 3:
-    print "Require input and output shape files"
-    sys.exit()
+####################################################
 
-infile = sys.argv[1]
-outfile = sys.argv[2]
+parser = argparse.ArgumentParser(description="Compile linestrings forming ring in shapefile into polygons\n"+
+        "Polygons may be split into tiles.")
+
+parser.add_argument('input_file',type=str,help="Input shape file")
+parser.add_argument('output_file',type=str,help="Output shape file")
+parser.add_argument('-s','--tilesize',type=float,help='Size of tile to divide into',default=100000.0)
+parser.add_argument('-t','--tolerance',type=float,help='Endpoint tolerance forming rings',default=0.1)
+parser.add_argument('-w','--where',type=str,help='Condition (field=value) used to select line strings')
+args=parser.parse_args()
+
+infile = args.input_file
+outfile = args.output_file
 
 f = ogr.Open(infile)
 if f == None:
@@ -341,12 +392,21 @@ if f == None:
     sys.exit()
 layer = f.GetLayer(0)
 
+cfield=None
+cvalue=None
+if args.where:
+    cfield,cvalue=args.where.split('=',2)
+
 lines = LineSet()
 nptt=0
 while True:
     feat = layer.GetNextFeature()
     if not feat:
         break
+    if cfield:
+        value=feat.GetFieldAsString(cfield)
+        if value != cvalue:
+            continue
     geom = feat.GetGeometryRef()
     if geom.GetGeometryType() != ogr.wkbLineString:
         raise ValueError('Geometries must be line strings')
@@ -362,12 +422,11 @@ while True:
 print len(lines),'strings'
 print nptt,'points'
 
-rings = lines.formRings(0.0000001)
+rings = lines.formRings(args.tolerance)
 print len(rings)," rings found"
 
 if not rings:
     print "No output generated"
-
 
 if os.path.exists(outfile):
     os.unlink(outfile)
@@ -381,7 +440,7 @@ outl = outf.CreateLayer(os.path.basename(outfile),layer.GetSpatialRef(),ogr.wkbP
 defn = outl.GetLayerDefn()
 
 
-tilesize=100000
+tilesize=args.tilesize
 npoly = 0
 
 for r in rings:
