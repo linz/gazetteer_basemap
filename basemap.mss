@@ -8,8 +8,8 @@ Map {
 
 .land_base 
 {
-  .topo500[zoom<12],
-  .topo50[zoom>=12]
+  .topo500[zoom<13],
+  .topo50[zoom>=13]
    {
    polygon-fill: @land_base;
    line-color: @land_base;
@@ -83,7 +83,7 @@ Map {
    }
 }
 
-/* Currently only using topo250 hill shading ... */
+/* Hillshading currently not working  */
 
 .hillshade
 {
@@ -119,7 +119,8 @@ Map {
 
 .contour  
 {
-  .topo500[zoom>=10][zoom<13],
+  .topo500[zoom>=9][zoom<11],
+  .topo250[zoom>=11][zoom<13],
   .topo50[zoom>=13]
   {
       line-color: @contour;
