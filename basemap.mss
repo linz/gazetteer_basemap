@@ -13,8 +13,64 @@ Map {
    {
    polygon-fill: @land_base;
    line-color: @land_base;
-   line-width: 0.5;
+   line-width: 0.0;
    }
+}
+
+.land_160
+{
+    polygon-fill: @land_160;
+    line-color: @land_160;
+    line-width: 0.0;
+}
+
+.land_300
+{
+    polygon-fill: @land_300;
+    line-color: @land_300;
+    line-width: 0.0;
+}
+
+.land_600
+{
+    polygon-fill: @land_600;
+    line-color: @land_600;
+    line-width: 0;
+}
+
+.land_900
+{
+    polygon-fill: @land_900;
+    line-color: @land_900;
+    line-width: 0.0;
+}
+
+.land_1200
+{
+    polygon-fill: @land_1200;
+    line-color: @land_1200;
+    line-width: 0.0;
+}
+
+.land_1800
+{
+    polygon-fill: @land_1800;
+    line-color: @land_1800;
+    line-width: 0.0;
+}
+
+.land_2100
+{
+    polygon-fill: @land_2100;
+    line-color: @land_2100;
+    line-width: 0.0;
+}
+
+.land_2400
+{
+    polygon-fill: @land_2400;
+    line-color: @land_2400;
+    line-width: 0.0;
 }
 
 .coastline
@@ -44,11 +100,13 @@ Map {
   .exotic.topo250[zoom<13] 
   {
   polygon-fill: @exotic;
+  polygon-opacity: 0.3;
   }
   .native.topo50[zoom>=13],
   .native.topo250[zoom<13] 
   {
   polygon-fill: @native;
+  polygon-opacity: 0.3;
   }
 }
 

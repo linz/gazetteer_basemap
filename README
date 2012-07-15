@@ -109,15 +109,8 @@ alpha channel, but haven't managed to do this yet - I think I haven't been able 
 bit depth in the image.  Basically just needs fixing prepare_hstif.sh and then uncommenting the hill
 shading from layer.cfg.  Possibly a bit of work in styling too...
 
-2) Elevation colouring in the basemap
+2) Review the topo shape files to confirm that there are no others that should be rendered.
 
-The plan is to modify makepoly.py to allow it to build polygons based on selected attributes of the 
-linestrings in the input shapefile, and then use it to convert (say the topo500) contours to polygons
-and render them in different shades according to elevation.  This will make a much nicer looking basemap
-especially when zoomed out I think.  
-
-3) Review the topo shape files to confirm that there are no others that should be rendered.
-
-4) Replace the blank sea with a relief shaded or similar background.
+3) Replace the blank sea with a relief shaded or similar background.
 
 
