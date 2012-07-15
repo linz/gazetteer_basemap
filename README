@@ -48,11 +48,11 @@ folder, and sets up a project.mml file using them.
 This can be changed by altering the build_project.cfg file or creating a separate configuration file
 that overrides the appropriate parts of it.
 
-The resulting project file can be opened in tilemill and used to generate the basemap, or exported using
+The resulting project file can be opened in tilemill and used to generate the basemap, 
+or exported using the command below in the base directory (assuming the project is in the 
+gazetteer_basemap directory
 
-/usr/share/tilemill/index.js export --format=mbtiles project.mml gaz_basemap.mbtiles
-
-(Not tested - I think this is the correct command)
+/usr/share/tilemill/index.js export --format=mbtiles gazetteer_basemap gazetteer_basemap.mbtiles
 
 Other components
 ================

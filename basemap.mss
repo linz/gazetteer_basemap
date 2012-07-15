@@ -113,7 +113,8 @@ Map {
 .snow
 {
    polygon-fill: @snow;
-   polygon-opacity: 0.5;
+   polygon-opacity: 0.8
+  ;
 }
 
 .contour  
