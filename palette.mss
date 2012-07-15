@@ -14,7 +14,7 @@
 @land_2100: #d7cfb2;
 @land_2400: #d1d1d1;
 
-@light_grey: #D1D1D1;
+@light_grey: #C1D1D1;
 @dark_grey: #B3B0A9;
 
 @native: #BED271;

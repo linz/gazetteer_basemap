@@ -2,7 +2,8 @@
 
 .railway { 
   [zoom>=13] { line-color: @railway ; line-width: 2;}
-  [zoom>=10][zoom<13] { line-color: @railway; line-width: 1;}
+  [zoom>=11][zoom<13] { line-color: @railway; line-width: 1;}
+  [zoom=10] { line-color: @railway;  line-width: 0.5; }
   /*[zoom<=10] { line-color: @railway; line-width: 0.5;} */
   }
 
@@ -18,7 +19,7 @@
 
    .topo250[zoom<12]
    {
-       [zoom>=10][zoom<12][hway_num != ""]
+       [zoom>10][zoom<12]
        {
            line-color: @road_edge;
            line-width: 3;
@@ -52,7 +53,7 @@
        [zoom>=10][zoom<12]
        {
            line-color: @road_edge;
-           line-width: 3;
+           line-width: 4;
        }
    }
    .topo50[zoom>=12]
@@ -68,7 +69,14 @@
 
    .topo250[zoom<12]
    {
-       [zoom>=10][zoom<12][surface = "sealed"]
+ 
+       [zoom=10][surface = "sealed"]
+       {
+           line-color: @road;
+           line-width: 1.5;
+       }
+ 
+       [zoom=11][surface = "sealed"]
        {
            line-color: @road;
            line-width: 2;
@@ -91,14 +99,15 @@
 {
    /* Topo250 used until zoomed well in */
 
-   .topo250[zoom<12]
+   .topo250[zoom>=6][zoom<12]
    {
-       [zoom>=6]
+       line-color: @state_highway;
+       line-width: 0.5;
+       [zoom>6]
        { 
-           line-color: @state_highway;
            line-width: 1;
        }
-       [zoom>7][zoom<=9]
+       [zoom>7][zoom<10]
        { 
            line-color: @state_highway;
            line-width: 2;
@@ -106,7 +115,7 @@
        [zoom>=10][zoom<12]
        {
            line-color: @state_highway;
-           line-width: 2;
+           line-width: 3;
        }
    }
    .topo50[zoom>=12]
@@ -118,17 +127,17 @@
 
 .track
 {
-  .topo50[zoom>=13] 
+  .topo50[zoom>=12] 
   {
   [track_use = "vehicle"] 
   {  
-      line-dasharray:15,5;  
+      line-dasharray:10,2;  
       line-color: @road_edge;
       line-width: 1;
   }
   [track_use = "foot"] 
   {
-      line-dasharray:6,3;  
+      line-dasharray:4,2;  
       line-color: @road_edge;
       line-width: 1;
    }
