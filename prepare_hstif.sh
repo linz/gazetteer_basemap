@@ -1,5 +1,12 @@
 #!/bin/bash
+# Copyright 2012 Crown copyright (c)
+#  Land Information New Zealand and the New Zealand Government.
+#  All rights reserved
+# 
+#  This program is released under the terms of the new BSD license. See 
+#  the LICENSE file for more information.
 #
+#===================================================================
 #  Script to build a hillshading image file from the source.  The intention of this is
 #  to build an image which is black, with the hillshading encoded in the alpha channel, which
 #  can then be laid over the basemap.  It isn't working yet!
