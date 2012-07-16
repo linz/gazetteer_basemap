@@ -81,6 +81,18 @@ Map {
    line-color: @dark_water;
    line-width: 0.5;
    }
+  .topo500[zoom<7]
+   {
+   line-width: 0.25;
+   }
+}
+
+.wateredge
+{
+   .topo50[zoom>=12]
+   {
+   polygon-fill: @wateredge;
+   }
 }
 
 /* Hillshading currently not working  */

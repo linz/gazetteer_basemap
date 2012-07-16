@@ -3,34 +3,33 @@
 
 /* Elevation based colouring for basemap */
 
-@land_base: #e6f7c5;
-@land_160: #ebf7c5;
-@land_300: #f0f7c5;
-@land_600: #f1f2bc;
-@land_900: #f3eeb4;
-@land_1200: #f5e9ab;
-@land_1500: #f7e5a3;
-@land_1800: #e7daaa;
-@land_2100: #d7cfb2;
-@land_2400: #d1d1d1;
-
-@light_grey: #C1D1D1;
-@dark_grey: #B3B0A9;
+@land_base: #E6F7C5;
+@land_160: #EBF7C5;
+@land_300: #F0F7C5;
+@land_600: #F1F2BC;
+@land_900: #F3EEB4;
+@land_1200: #F5E9AB;
+@land_1500: #F7E5A3;
+@land_1800: #E7DAAA;
+@land_2100: #D7CFB2;
+@land_2400: #D1D1D1;
 
 @native: #BED271;
 @exotic: #CED871;
+
 @light_water: #D0E6F4;
 @dark_water: #0D85D8;
+@wateredge: #F7E5A3;
 
-@contour: #e8933f;
-@snow: #ffffff;
+@contour: #E8933F;
+@snow: #FFFFFF;
 
-@residential: @light_grey; 
+@residential: #E7E7E7;
+@residential2: #D1D1D1;
 
-@road: #e8933f;
-@road2: #ffffff;
-@road_edge: @dark_grey;
 @state_highway: #EB704F;
-@railway: #000000;
+@road: #E8933F;
+@track: #B3B0A9;
+@railway: #404040;
 
 @map_base: @light_water;

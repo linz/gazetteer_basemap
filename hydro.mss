@@ -25,9 +25,12 @@
        line-width: 0.5; 
        line-color: @dark_water; 
    }
-   .topo500[zoom=8]
+   .topo500[zoom=8] { line-width: 0.15; }
+   .topo500[zoom=9] { line-width: 0.25; }
+   .topo50[zoom>13]
    {
-       line-width: 0.25;
+       line-width: 0.8; 
+       line-color: @dark_water; 
    }
 }
 
@@ -39,6 +42,6 @@
    { 
        polygon-fill: @light_water; 
        line-color: @dark_water;  
-       line-width: 0.5; 
+       line-width: 0.25; 
    }
 }
