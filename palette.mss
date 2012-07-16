@@ -19,17 +19,22 @@
 
 @light_water: #D0E6F4;
 @dark_water: #0D85D8;
-@wateredge: #F7E5A3;
+@sand: #F7E5A3;
+@mud: #F7E5A3;
+@shingle: #D1D1D1;
+@rock: #C7C7B2;
 
 @contour: #E8933F;
 @snow: #FFFFFF;
 
 @residential: #E7E7E7;
 @residential2: #D1D1D1;
+@fenceline: #D1D1D1;
 
 @state_highway: #EB704F;
 @road: #E8933F;
 @track: #B3B0A9;
 @railway: #404040;
+@station: #FF7050;
 
 @map_base: @light_water;

@@ -14,3 +14,12 @@
   polygon-fill: @residential2;
   }
 }
+
+.fenceline
+{
+   .topo50[zoom>=13]
+   {
+   line-width: 0.3;
+   line-color: @fenceline;
+   }
+}

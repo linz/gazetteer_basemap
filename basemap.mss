@@ -87,11 +87,35 @@ Map {
    }
 }
 
-.wateredge
+.wateredge.sand
 {
    .topo50[zoom>=12]
    {
-   polygon-fill: @wateredge;
+   polygon-fill: @sand;
+   }
+}
+
+.wateredge.mud
+{
+   .topo50[zoom>=12]
+   {
+   polygon-fill: @mud;
+   }
+}
+
+.wateredge.shingle
+{
+   .topo50[zoom>=12]
+   {
+   polygon-fill: @shingle;
+   }
+}
+
+.rock
+{
+   .topo50[zoom>=12]
+   {
+   polygon-fill: @rock;
    }
 }
 

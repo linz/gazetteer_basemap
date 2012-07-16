@@ -7,6 +7,23 @@
   /*[zoom<=10] { line-color: @railway; line-width: 0.5;} */
   }
 
+.railway_station {
+  [zoom>=12] { 
+     marker-width: 5;
+     marker-height: 5;
+     marker-line-width: 0.8;
+     marker-line-color: @railway;
+     marker-fill: @station;
+     }
+  [zoom>=14]{
+     marker-width: 8;
+     marker-height: 8;
+     marker-line-width: 1.0;
+     }
+}
+
+
+
 /* Build up the roads using several different symbolisers.  These will be drawn in the order 
    they occur, so put unsealed roads under sealed roads under highways
 */
