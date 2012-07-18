@@ -155,7 +155,7 @@ Map {
 
 .contour  
 {
-  .topo500[zoom>=9][zoom<11],
+  .topo500[zoom>=10][zoom<11],
   .topo250[zoom>=11][zoom<13],
   .topo50[zoom>=13]
   {
