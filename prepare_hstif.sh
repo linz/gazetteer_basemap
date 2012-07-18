@@ -13,37 +13,43 @@
 # 
 #  This also converts from the source projection (2193) to 3785
 
+rm="rm -f"
+if [ $1 == '-d' ]; then
+   rm="echo rm"
+   shift
+fi
+
 tif=$1
 outf=$2
 
-#rm="echo rm"
-rm=rm
 
-$rm -f temp1.tif
-gdalwarp -s_srs EPSG:2193 -t_srs EPSG:3785 $tif temp1.tif
+$rm -f hstmp.tif
+gdalwarp -s_srs EPSG:2193 -t_srs EPSG:3785 $tif hstmp.tif
 
 # Extract the geotif info
-listgeo -tfw temp1.tif
-listgeo temp1.tif > temp1.mtd
+listgeo hstmp.tif > hstmp.mtd
 
 # Create a mask image for the boundary resulting from warping
 # First make a white version of the original image
 
-convert -quiet -white-threshold 0% $tif temp1_mask0.tif
+convert -quiet -white-threshold 0% $tif hstmp_mask0.tif
 if [ -e ${tif%tif}tfw ]; then
-   cp ${tif%tif}tfw temp1_mask0.tfw
+   cp ${tif%tif}tfw hstmp_mask0.tfw
+   chmod 644 hstmp_mask0.tfw
 else
-   listgeo -tfw $tif
-   mv ${tif%tif}tfw temp1_mask0.tfw
+   cp $tif hstmp_copy.tif
+   listgeo -tfw hstmp_copy.tif
+   mv hstmp_copy.tfw hstmp_mask0.tfw
+   rm -f hstmp_copy.tif
 fi
-gdalwarp -s_srs EPSG:2193 -t_srs EPSG:3785 temp1_mask0.tif temp1_mask1.tif
-convert -quiet -black-threshold 1% temp1_mask1.tif temp1_mask2.tif
+gdalwarp -s_srs EPSG:2193 -t_srs EPSG:3785 hstmp_mask0.tif hstmp_mask1.tif
+convert -quiet -black-threshold 1% hstmp_mask1.tif hstmp_mask2.tif
 
-# Now make the image transparent in sea areas...
+# Now make a mask for the sea areas (black=transparent in the sea areas
 
-convert -quiet -black-threshold 100% temp1.tif temp1_black.tif
-cp temp1_black.tif temp1_mask3.tif
-cp temp1.tfw temp1_mask3.tfw
+convert -quiet -black-threshold 100% hstmp.tif hstmp_mask3.tif
+listgeo -tfw hstmp.tif
+mv hstmp.tfw hstmp_mask3.tfw
 # Paint the islands and coastline onto the image
 echo "Painting out coast"
 while [ $# -gt 2 ]; do 
@@ -55,30 +61,37 @@ while [ $# -gt 2 ]; do
     
         echo "Processing $shpfile"
 	layer=`basename $shpfile .shp`
-        echo gdal_rasterize -burn 255 -l $layer $shpfile temp1_mask3.tif
-        gdal_rasterize -burn 255 -l $layer $shpfile temp1_mask3.tif
+        echo gdal_rasterize -burn 255 -l $layer $shpfile hstmp_mask3.tif
+        gdal_rasterize -burn 255 -l $layer $shpfile hstmp_mask3.tif
     fi
 done
 
 # Invert the original image, as want it to be transparent where it is currently light
-convert -quiet -negate temp1.tif temp1_mask4.tif
+convert -quiet -negate hstmp.tif hstmp_mask4.tif
 
 # Combine the masks using the minimum value
-convert -quiet -evaluate-sequence min temp1_mask2.tif temp1_mask3.tif temp1_mask5.tif
-convert -quiet -evaluate-sequence min temp1_mask4.tif temp1_mask5.tif temp1_mask6.tif
+convert -quiet -evaluate-sequence min hstmp_mask2.tif hstmp_mask3.tif hstmp_mask5.tif
+convert -quiet -evaluate-sequence min hstmp_mask4.tif hstmp_mask5.tif hstmp_mask6.tif
 
 
 # Build a black image with the minimum value as opacity
+# Idiosyncrasy in ImageMagick?  Seems to work if I build a png then convert to TIF,
+# but not if I build a TIF directly
+
+convert -quiet -colorspace Gray hstmp_mask6.tif hstmp_mask6.png
+convert -quiet -black-threshold 100% hstmp.tif hstmp_black.png
+convert hstmp_black.png hstmp_mask6.png -compose copy_opacity -composite hstmp_final.png
+convert hstmp_final.png hstmp_final.tif
+
 rm $outf
-rm temp1.tif
-convert -quiet temp1_black.tif temp1_mask5.tif -compose copy_opacity -composite temp1.tif
-geotifcp -g temp1.mtd temp1.tif $outf
+geotifcp -g hstmp.mtd hstmp_final.tif $outf
 
-$rm temp1_mask0.tif temp1_mask0.tfw temp1_mask1.tif
-$rm temp1_mask2.tif temp1_mask3.tif temp1_mask3.tfw temp1_mask4.tif temp1_mask5.tif
-$rm temp1_black.tif
-$rm temp1.tfw
-$rm temp1.mtd
-$rm temp1.tif
-
-
+$rm hstmp_mask*.tif
+$rm hstmp_black.png
+$rm hstmp_mask6.png
+$rm hstmp_final.png
+$rm hstmp_final.tif
+$rm hstmp.tif
+$rm hstmp_mask0.tfw
+$rm hstmp_mask3.tfw
+$rm hstmp.mtd
