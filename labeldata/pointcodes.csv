@@ -1,0 +1,77 @@
+code,value
+AIR,AIRPORT: Landing ground for aeroplanes
+BAY,BAY/INLET: A salient of water into the land
+BCH,BEACH: Sand or gravel shore of a body of water
+BDGE,BRIDGE: Structure spanning an obstacle
+BLDG,BUILDING: Man made structure for a specific use
+BNK,BANK: Underwater eminence which may dry at L.W.
+BSN,MOUNTAIN BASIN: Bowl shaped depression in land
+CAVE,CAVE: Subterranean chamber
+CEM,CEMETERY: Place for burying the dead
+CGND,CAMPING GROUND: Area used for temporary shelter
+CLIF,CLIFF: Steep rock face
+CRTR,CRATER: Depression caused by volcanic activity
+DAM,DAM: Barrier constructed across a water course
+ESTY,ESTUARY: Tidal mouth of a river
+FALL,WATERFALL: Sudden steepening in river gradient
+FARM,FARM: Area been developed for farming
+FLAT,FLAT: Relatively level area of land
+FORD,FORD: Shallow unbridged river crossing
+FRST,FOREST: Dense growth of trees
+GEO,GEOTHERMAL AREA: Area of geothermal activity
+GLCR,GLACIER: Accumulation of slowly moving ice
+GLKS,GOLF LINKS: Area set out for golf
+GORG,GORGE/VALLEY: Linear depression in land surface
+HILL,HILL: A natural elevation of the Earth's surface
+HIST,HISTORIC: Area/structure of historic importance
+HOSP,HOSPITAL: Institution for treatment of the sick
+HSTD,HSTD: Homestead
+HUT,HUT: Simple rural building for shelter
+ISLD,ISLAND: Body of land surrounded by water
+ISTH,ISTHMUS: Neck of land joining two larger areas
+LAKE,LAKE: Body of inland water
+LOC,LOCALITY: Defined area of low or nil population
+LTH,LIGHTHOUSE: Lighted structure for navigation
+METR,METR: Metropolis: Major city
+MINE,MINE: Excavation for the extraction of minerals
+MNAT,MISCELLANEOUS NATURAL FEATURE:
+MPLA,MISCELLANEOUS PLACE:Misc named place or area
+MRFM,MARINE ROCK FORMATION
+NAVB,NAVIGATIONAL BEACON: A navigational aid.
+NLR,NLR: Native Land Reserve or Block
+PA,PA: A Maori locality
+PARK,PARK: Area set aside for recreational use
+PASS,PASS: Low point in a range of hills
+PEN,PENINSULA: Land area nearly surrounded by water
+PNT,POINT: Area protruding into water or floodplain
+POPL,POPULATED PLACE: Populated area less than a town
+PPLN,PIPELINE: Conduit for carriage of liquids or gas
+RC,RACECOURSE: Circuit on which races are run
+RDGE,RIDGE: Elongated elevation of land
+RDRF,ROAD RELATED FEATURE:Named road object
+RLYF,RAILWAY RELATED FEATURE: Named railway object
+RNGE,RANGE: Aligned and connected series of hills
+ROCK,ROCK: Isolated rocky outcrop
+RSTN,RAILWAY STATION: Stopping place for trains
+SBRB,SUBURB: Component part of a town
+SCH,SCHOOL: Place of instruction
+SEA,SEA: Ocean or large body of saltwater
+SKI,SKI: Area for skiing activities
+SLIP,SLIP: Area of unstable hillside
+SPR,SPRING: Natural issue of water
+STRA,STRAIT: Narrow stretch of water
+STRM,STREAM: Natural watercourse
+SWMP,SWAMP: Permanently waterlogged area
+TOWN,TOWN: Town or city forming nucleus of region
+TRCK,TRACK: Foot path
+TREE,TREE: Tree with historical significance
+TRIG,TRIG: Geodetic Station
+TUNL,TUNNEL: Man made subterranean passage
+TWAY,TRAMWAY: Narrow gauge bush railway
+UNIV,UNIVERSITY: Institution of higher learning
+USAT,URBAN SATELLITE: S/c community adjacent to city
+WELL,WELL: Hole bored for the extraction of liquid or gas
+WHF,WHARF: Structure for the berthing of vessels
+WILD,WILDERNESS AREA: Area preserved in natural state
+WRCK,"WRECK: Wrecked,sunken or stranded vessel"
+WWAY,WATER WAY: Man made water course

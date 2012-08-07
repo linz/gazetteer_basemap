@@ -1,0 +1,10 @@
+This directory contains the files required to build the data used for WFS map labels service
+used by the gazetteer basemap.  The scripts assume a PostGis enabled postgresql database 
+that can be used to generate the data, and from which the table is dumped ready for upload 
+into the LINZ data service.  Also it assumes that the geographic_name.shp files from the 
+NZ Topo50 database are available for building the layers from.
+
+prepdata.sh builds the labels required for the WFS layer.
+
+loadcodes.sh can be used to add an additional table of point code descriptions to
+   help analyze the data.
