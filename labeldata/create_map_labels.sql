@@ -7,40 +7,36 @@
 
 drop table if exists town_names;
 
-with t1(name, code, size, geom) as
+with t1(name, code, geom) as
 (select 
    initcap(name),
    desc_code,
-   size,
    st_buffer( st_transform(wkb_geometry,2193),10000, 2 )
  from
    geographic_name
  where desc_code in ('SBRB','POPL','TOWN','USAT','METR')
 ),
-t2(name,code,size,geom) as
+t2(name,code,geom) as
 (select
    name,
    code,
-   size,
    st_union(geom)
  from t1
- group by name, code, size
+ group by name, code
 ),
-t3(name,code,size,geom) as
+t3(name,code,geom) as
 (select 
    name,
    code,
-   size,
    ST_GeometryN(geom,generate_series(1,St_NumGeometries(geom)))
   from t2
   where geometrytype(geom) = 'MULTIPOLYGON'
  ),
-t4( name, code, size, geom ) as
+t4( name, code, geom ) as
 (
 select 
   name,
   code,
-  size,
   st_centroid(geom)
 from
   t2
@@ -50,7 +46,6 @@ union
 select
   name,
   code,
-  size,
   st_centroid(geom)
 from
   t3
